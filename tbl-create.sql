@@ -4,7 +4,7 @@ use lesson2;
 DROP TABLE IF EXISTS members;
 CREATE TABLE members (
     id INT(10) AUTO_INCREMENT,
-    email VARCHAR(128) NOT NULL,
+    email VARCHAR(128) NOT NULL UNIQUE,
     user VARCHAR(128) NOT NULL,
     password VARCHAR(100),
     name VARCHAR(128),
