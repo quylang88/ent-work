@@ -6,7 +6,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $email = htmlspecialchars($_SESSION['join']['email'], ENT_QUOTES, 'UTF-8');
         $user = htmlspecialchars($_SESSION['join']['name'], ENT_QUOTES, 'UTF-8');
 /* (1)  パスワード　データを取得する処理を記述                    */
-        /* $password = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx */
+        $password = 'testpass';
+        $hash = password_hash($password, PASSWORD_DEFAULT); 
         $picture = htmlspecialchars($_SESSION['join']['image'], ENT_QUOTES, 'UTF-8');
         $dbh = db_conn();
         try{
@@ -19,7 +20,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             $stmt->execute();
 	        unset($_SESSION['join']);
 /* (2)  画面遷移処理を記述                      */
-            /*  xxxxxxxxxxxxxxxxxxxxxxxxxxxxx */
+            header('Location: thanks.php');
 	        exit();
         }catch (PDOException $e){
             echo($e->getMessage());
@@ -74,8 +75,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 		</dd>
 		</dl>
 /* (3)  リンク表示処理を記述                      */
-        /* <div><a href=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  修正する</a>
-		<div><a href="input.php?action=rewrite">&laquo;&nbsp;修正する</a>　|　
+		<div><a href="input.php?action=rewrite">&laquo;&nbsp;修正する</a>
 			<input type="submit" value="登録する" />
 		</div>
 		</form>
